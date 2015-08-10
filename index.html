@@ -1,9 +1,55 @@
 <html>
 <head>
 	<title> Document Builder </title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 
 <body>
-<h1> testing node </h1> 
+	<script type="text/jsx">
+	var data = [{question: "Why do cats hate people?"},
+		{question: "Why do dogs love people?"}
+	]
+
+
+		var QuestionComponent = React.createClass({
+			render: function(){
+				return (<div>
+					<h1>{this.props.question}</h1>
+					</div>
+				);
+			}
+		});
+
+		var QuestionDisplay = React.createClass({
+			render: function(){
+				return (
+					<div>
+					<h1> this is the question list </h1>
+					<QuestionList data={this.props.data}/>
+					</div>
+				);
+			}
+		});
+
+		var QuestionList = React.createClass({
+			render: function(){
+				var questions = this.props.data.map(function(question){
+					return <QuestionComponent question={question.question} />
+				});
+
+				return (
+					<div>
+					{questions}
+					</div>
+					);
+			}
+		})
+
+		React.render(<QuestionDisplay data={data} />, document.body);
+
+
+	</script>
 </body>
 </html>
