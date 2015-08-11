@@ -1,9 +1,13 @@
 var express = require('express'),
-app = express(),
-server = require('http').createServer(app),
-io = require('socket.io').listen(server);
+    app = express(),
+    server = require('http').createServer(app),
+    path = require('path'),
+    index = require('./routes/index');
+    // io = require('socket.io').listen(server);
+
+app.set('views', path.join(__dirname,'views'));
+
 server.listen(3000);
 
-app.get('/', function(req,res){
-	res.sendFile(__dirname + '/index.html');
-});
+// routes
+app.use('/', index);
